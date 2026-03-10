@@ -17,7 +17,6 @@ public class BookingManager {
         System.out.println("Booking request added for " + userName);
     }
 
-    // Process booking requests (FIFO)
     public void processBooking() {
 
         if (bookingQueue.isEmpty()) {
@@ -28,11 +27,16 @@ public class BookingManager {
         Booking booking = bookingQueue.poll();
         Room room = rooms.get(booking.roomNumber);
 
-        if (room != null && !room.isBooked) {
+        if (room == null) {
+            System.out.println("Room " + booking.roomNumber + " does not exist.");
+            return;
+        }
+
+        if (!room.isBooked) {
             room.isBooked = true;
             System.out.println("Room " + booking.roomNumber + " booked for " + booking.userName);
         } else {
-            System.out.println("Room not available for " + booking.userName);
+            System.out.println("Room already booked.");
         }
     }
 }
