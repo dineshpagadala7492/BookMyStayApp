@@ -2,20 +2,22 @@ import java.util.*;
 
 public class BookingManager {
 
-    Queue<Booking> bookingQueue = new LinkedList<>();
     Map<Integer, Room> rooms = new HashMap<>();
+    Queue<Booking> bookingQueue = new LinkedList<>();
 
-    // Add room
+    // Add room to system
     public void addRoom(int roomNumber) {
         rooms.put(roomNumber, new Room(roomNumber));
     }
 
-    // Request booking
-    public void requestBooking(String customerName, int roomNumber) {
-        bookingQueue.add(new Booking(customerName, roomNumber));
+    // User requests booking
+    public void requestBooking(String userName, int roomNumber) {
+        Booking booking = new Booking(userName, roomNumber);
+        bookingQueue.add(booking);
+        System.out.println("Booking request added for " + userName);
     }
 
-    // Process booking
+    // Process booking requests (FIFO)
     public void processBooking() {
 
         if (bookingQueue.isEmpty()) {
@@ -28,9 +30,9 @@ public class BookingManager {
 
         if (room != null && !room.isBooked) {
             room.isBooked = true;
-            System.out.println("Booking confirmed for " + booking.customerName);
+            System.out.println("Room " + booking.roomNumber + " booked for " + booking.userName);
         } else {
-            System.out.println("Room already booked.");
+            System.out.println("Room not available for " + booking.userName);
         }
     }
 }

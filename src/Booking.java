@@ -1,10 +1,10 @@
 public class Booking {
 
-    String customerName;
+    String userName;
     int roomNumber;
 
-    public Booking(String customerName, int roomNumber) {
-        this.customerName = customerName;
+    public Booking(String userName, int roomNumber) {
+        this.userName = userName;
         this.roomNumber = roomNumber;
     }
 }
